@@ -9,7 +9,7 @@ Hey there! Welcome to this tutorial that I hope can help any web developer to be
 
 Regex is widely used among many computer languages to match strings, lines, groups of strings. Assists with any sort of algorithms that require specific matching methods to get a desired result.
 
-(Full Disclosure I am making this in reference to JavaScript. So not all every engine works the same across different computer languages! 😁 )
+(Full Disclosure I am making this in reference to JavaScript. So not every engine works the same across different computer languages! Or even different browser testers versus the built in node.js regex engine seem to process RegExp differently)
 
  If you are trying to match an email, an exact string, or group of strings you can store a regular expression inside a variable for later use in languages like JavaScript as shown below:
 
@@ -132,7 +132,30 @@ console.log(lazy);
 
 ---
 ### OR Operator
+The OR operator ( ```|``` ) can be used in conjunction with capture groups to grab a certain variation of similary spelled words but given other parameters we can narrow down a specific match.
+```js
+const orRegex = /th(e|i|n)ng.?/g;
+const words = 'then I was there to do the thing';
+const match = words.match(orRegex);
+console.log(match);
+//matches
+[ 'thing' ]
 
+const orRegex = /th(e|i|n)r.?/g;
+const words = 'then I was there to do the thing';
+const match = words.match(orRegex);
+console.log(match);
+//matches
+[ 'there' ]
+
+const orRegex = /th(e|a|i|n)n.?/g;
+const words = 'then I was there to do the thing';
+const match = words.match(orRegex);
+console.log(match);
+//matches
+[ 'then ', 'thing' ]
+```
+---
 ### Character Classes
 
 ### Flags
