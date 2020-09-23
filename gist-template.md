@@ -200,7 +200,7 @@ With no other flags the engine by default will try to match the very first match
 
     const unicodeRegex = /\p{Lu}/gu;
     const cyrillicString = 'Приветствую вас! Меня зовут Андерс. Я люблю программирование!';
-    const match = russianString.match(unicodeRegex);
+    const match = cyrillicString.match(unicodeRegex);
     console.log(match);
     //matches all the uppercase cyrillic characters in this sentence
     [ 'П', 'М', 'А', 'Я' ]
@@ -230,7 +230,32 @@ With no other flags the engine by default will try to match the very first match
     ```
 ---
 ### Grouping and Capturing
+Capture groups can be denoted by whats inside the parentheses ```/()/```. This can get part of a match as a separate piece in a result array. If there is some quantifier after the parentheses this matcha applies to the whole capture group.
+```js
+const groupRegex = /(go)/g;
+const words = 'Here we gooooooooooooooo'
+const match = words.match(groupRegex);
+console.log(match);
+//this will only capture the group that consists of just 'go'
+[ 'go' ]
 
+//if we add the + quantifier we can capture one or more of the capture groups if they appear together
+const groupRegex = /(go)+/g;
+const words = 'Here we gogogogogogo'
+const match = words.match(groupRegex);
+console.log(match);
+//outputs
+[ 'gogogogogogogo' ]
+
+//without this quantifier will match each one and separate them out
+const groupRegex = /(go)/g;
+const words = 'Here we gogogogogogo'
+const match = words.match(groupRegex);
+console.log(match);
+//outputs
+[ 'go', 'go', 'go', 'go', 'go', 'go' ]
+```
+---
 ### Bracket Expressions
 
 ### Greedy and Lazy Match
