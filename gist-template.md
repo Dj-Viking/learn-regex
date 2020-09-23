@@ -158,6 +158,27 @@ console.log(match);
 ---
 ### Character Classes
 
+Denoted by characters placed inside ( ```[ ]``` ) Also can be called a character set. These can tell the regex engine to match (or not match) only one out of many different characters. Use flags to further optimize the match to something more specific or broad.
+* Options include but not limited to:
+  - ```/[0-9]/``` if searching for a single character that is either 0 through 9 
+  - ```/[a-z]/``` if searching for a single lowercase character in the category of the english alphabet a through z
+  - ```/[A-Z]/``` if searching for a single uppercase character in the category of the english alphabet A through Z
+  - ```/[i-m0-8]/``` if searching for an isolated set of characters or any sort of range of characters
+  - ```/[^a-z0-9]/``` using the carat anchor here can negate this particular set of characters from the engine to match against
+```js
+const charClass = /[0-9].?/;
+const words = 'I once saw a giraffe who was 30 feet tall!';
+const match = words.match(charClass);
+console.log(match);
+//using the .? we can match the entire number 30 in the sentence
+[
+  '30',
+  index: 29,
+  input: 'I once saw a giraffe who was 30 feet tall!',
+  groups: undefined
+]
+```
+---
 ### Flags
 
 ### Grouping and Capturing
