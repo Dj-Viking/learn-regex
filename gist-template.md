@@ -9,7 +9,7 @@ Hey there! Welcome to this tutorial that I hope can help any web developer to be
 
 Regex is widely used among many computer languages to match strings, lines, groups of strings. Assists with any sort of algorithms that require specific matching methods to get a desired result.
 
-(Full Disclosure I am making this in reference to JavaScript. So not every engine works the same across different computer languages! Or even different browser testers versus the built in node.js regex engine seem to process RegExp differently)
+(Full Disclosure I am making this in reference to JavaScript. Not every engine works the same across different computer languages! Or even different browser testers versus the built in node.js regex engine seem to process RegExp differently)
 
  If you are trying to match an email, an exact string, or group of strings you can store a regular expression inside a variable for later use in languages like JavaScript as shown below:
 
@@ -27,7 +27,7 @@ const regex = new RegExp(/\w+@\w+\.(net|com|org)/, 'g');
 
 //test if the email pattern matches
 const myEmail = 'anders.swedishviking@gmail.com'
-if (regex.test(myEmail)){
+if (regex.test(myEmail)) {
   return 'this email matches the regex pattern!'
 } else {
   return 'this email does not match the regex pattern!'
@@ -180,7 +180,56 @@ console.log(match);
 ```
 ---
 ### Flags
+In JavaScript there are 6 different flags to use. They are placed on the right side of the delimiter slashes ( ```/[0-9]/igmsuy``` ). These flags can tell the regex engine to account for the entire string to match against with certain parameters.
 
+With no other flags the engine by default will try to match the very first match from reading the string left to right.
+* ( ```g``` ) - the global flag which will search to match the expression against the entire string, instead of a single line, or only the first match from reading left to right. 
+
+* ( ```i``` ) - the case-insensitive flag will disregard the difference between uppercase and lowercase letters.
+* ( ```m``` ) - the multi-line mode flag will work with the anchors ( ```^``` beginning of a line ) and ( ```$``` end of a line ). This tells the regex engine to search for matches across multiple line breaks in the string.
+* ( ```s``` ) - the 'dotall' mode enables the dot ( ```.``` ) to match a newline character ( ```\n``` ).
+* ( ```u``` ) - This enables full unicode support which opens the engine up to characters from any language, hex-code characters, and currency symbols.
+  - ```js
+    /*
+    The unicode flag must be used in conjunction with special regex properties
+
+    The /\p{L}/gu refers to any letter from any language upper or lowercase. 
+    
+    which can change to {Ll} for lowercase only and {Lu} for uppercase only. There are many other options
+    */
+    ```
+    ```js
+    const unicodeRegex = /\p{Lu}/gu;
+    const cyrillicString = 'Приветствую вас! Меня зовут Андерс. Я люблю программирование!';
+    const match = russianString.match(unicodeRegex);
+    console.log(match);
+    //matches all the uppercase cyrillic characters in this sentence
+    [ 'П', 'М', 'А', 'Я' ]
+
+    //p.s. the sentence reads 'I say greetings to you all! My name is Anders. I love programming!' 
+    ```
+  
+* ( ```y``` ) - Allows the search for a match to begin at a particular position in a string.
+```js
+const positionRegex =  /\w+/y;
+const words = 'Check out the position of this word';
+
+//the y flag makes the exec method look at the exact position of the last lastIndex property that we will set the value to the regex expression itself
+
+//adding the + quantifier to get one or more connected word characters right at this index. otherwise will get the letter 'w'
+
+positionRegex.lastIndex = 31;
+const execute = positionRegex.exec(words);
+console.log(execute);
+//result
+[
+  'word',
+  index: 31,
+  input: 'Check out the position of this word',
+  groups: undefined
+]
+```
+---
 ### Grouping and Capturing
 
 ### Bracket Expressions
