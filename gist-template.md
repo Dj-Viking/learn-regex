@@ -200,7 +200,7 @@ With no other flags the engine by default will try to match the very first match
 
     const unicodeRegex = /\p{Lu}/gu;
     const cyrillicString = 'Приветствую вас! Меня зовут Андерс. Я люблю программирование!';
-    const match = russianString.match(unicodeRegex);
+    const match = cyrillicString.match(unicodeRegex);
     console.log(match);
     //matches all the uppercase cyrillic characters in this sentence
     [ 'П', 'М', 'А', 'Я' ]
