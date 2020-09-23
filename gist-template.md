@@ -257,7 +257,19 @@ console.log(match);
 ```
 ---
 ### Bracket Expressions
+This can also categorize into the same field as [Character Classes](#character-classes) when using  ```[]``` . 
 
+However when using ```{}``` this is used to specify an exact amount of things to match against always used after an existing expression
+```js
+//when also capturing groups you can capture a specific amount of the capture group 
+const braceRegex = /(na){3}/g;
+const words = 'bananana';
+const match = words.match(braceRegex);
+console.log(match);
+//output
+[ 'nanana' ]
+```
+---
 ### Greedy and Lazy Match
 
 ### Boundaries
