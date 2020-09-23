@@ -197,8 +197,7 @@ With no other flags the engine by default will try to match the very first match
     
     which can change to {Ll} for lowercase only and {Lu} for uppercase only. There are many other options
     */
-    ```
-    ```js
+
     const unicodeRegex = /\p{Lu}/gu;
     const cyrillicString = 'Приветствую вас! Меня зовут Андерс. Я люблю программирование!';
     const match = russianString.match(unicodeRegex);
@@ -210,25 +209,25 @@ With no other flags the engine by default will try to match the very first match
     ```
   
 * ( ```y``` ) - Allows the search for a match to begin at a particular position in a string.
-```js
-const positionRegex =  /\w+/y;
-const words = 'Check out the position of this word';
+  - ```js
+    const positionRegex =  /\w+/y;
+    const words = 'Check out the position of this word';
 
-//the y flag makes the exec method look at the exact position of the last lastIndex property that we will set the value to the regex expression itself
+    //the y flag makes the exec method look at the exact position of the last lastIndex property that we will set the value to the regex expression itself
 
-//adding the + quantifier to get one or more connected word characters right at this index. otherwise will get the letter 'w'
+    //adding the + quantifier to get one or more connected word characters right at this index. otherwise will get the letter 'w'
 
-positionRegex.lastIndex = 31;
-const execute = positionRegex.exec(words);
-console.log(execute);
-//result
-[
-  'word',
-  index: 31,
-  input: 'Check out the position of this word',
-  groups: undefined
-]
-```
+    positionRegex.lastIndex = 31;
+    const execute = positionRegex.exec(words);
+    console.log(execute);
+    //result
+    [
+      'word',
+      index: 31,
+      input: 'Check out the position of this word',
+      groups: undefined
+    ]
+    ```
 ---
 ### Grouping and Capturing
 
