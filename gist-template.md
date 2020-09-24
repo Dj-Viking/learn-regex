@@ -319,7 +319,33 @@ console.log(match);
 ```
 ---
 ### Boundaries
+The boundary metacharacter ( ```\b``` ) refers to matching a position in the string which is followed by a word character but not any word characters after that word character that is adjacent to a boundary. 
 
+Or a position that has preceded a word character but is not followed by a word character.
+
+The ( ```\B``` ) metacharacter does the opposite effect as the ( ```\b``` ) metacharacter.
+```js
+/**
+ * I think the best way to explain the boundary is with this following example. The expression will match with the beginning letters of each word because they are word characters preceded by a boundary ( the literal beginning of the string with no space between the " and T )
+ * 
+ * Then it continues on to match the space ( ' ' ) character because it was preceded by a word character and then a boundary,
+ * 
+ * Then it continues on to match the ( w ) character since it was preceded by a non-word character and then a boundary, and so on...
+ * 
+ * */
+const boundariesRegex = /\b.+?/g;
+const words = "The weather is beautiful outside!";
+const match = words.match(boundariesRegex);
+console.log(match);
+//outputs
+[
+  'T', ' ', 'w', ' ',
+  'i', ' ', 'b', ' ',
+  'o', '!'
+]
+
+```
+---
 ### Back-references
 
 ### Look-ahead and Look-behind
