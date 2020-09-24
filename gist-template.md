@@ -347,7 +347,33 @@ console.log(match);
 ```
 ---
 ### Back-references
+A captured group can be 'back-referenced' denoted by the metacharacter ( ```\N``` ) where N is replaced with a number referring to the first ' ```\1``` ' or second ' ```\2``` ' established capture group from left to right inside the expression itself.
+```js
 
+ // This expression will back reference the first established 
+ // capture group denoted by the \1 after the group list. 
+ // And try to match anything that appears before or after the 
+ // first capture groups inclusion brackets. 
+ 
+ // I honestly don't quite understand this just yet, as it seems to be a defensive approach 
+ // to finding things within a set of characters while 
+ // not trying to confuse the engine to match things 
+ // that we dont want or not match things that we do want.
+
+const backRefRegex = /(['"])(.*?)\1/g;
+const words = `They say: "If ya don't know, Now you know!".`;
+const match = words.match(backRefRegex);
+console.log(match);
+//outputs
+[ `"If ya don't know, Now you know!"` ]
+
+//because if we type the literal expression again 
+//instead of backreferencing, it will not match the result that we want.
+const backRefRegex = /(['"])(.*?)(['"])/g;
+//outputs
+[ `"If ya don'` ]
+```
+---
 ### Look-ahead and Look-behind
 
 ## Author
