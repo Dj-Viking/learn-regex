@@ -271,7 +271,53 @@ console.log(match);
 ```
 ---
 ### Greedy and Lazy Match
+Greedy and Lazy refer to the different quantifiers and how they are used to match strings according to the parameters set by the quantifier symbols
+* Greedy - For every position in a string, the expression tries to match the pattern at that position, if there is no match move on to the next position
+```js
+/**
+ * this expression tries to match a double-quote ( " ), any character after the double-quote with the ( . ) and ( + ) one or more things after any character after the double-quote and stop matching after the last double-quote in the expression
+ * 
+ * */
 
+const greedyRegex = /".+"/;
+const words = 'Harry Potter "and" the goblet of "fire" was awesome!';
+const match = words.match(greedyRegex);
+console.log(match);
+
+//resulting output even without the global flag, it continues to match until the engine finds the next double-quote
+[
+  '"and" the goblet of "fire"',
+  index: 13,
+  input: 'Harry Potter "and" the goblet of "fire" was awesome!',
+  groups: undefined
+]
+```
+* Lazy - denoted by the ( ```?``` ) symbol placed after a quantifier such as ( ```*?``` ), ( ```+?``` ), or ( ```??``` ). This produces the opposite effect as greedy, in that if there is no match in the next position the engine stops and returns what it matched before there was no match.
+```js
+/**
+ * This expression tries to match one or more of any character ( .+ ) connected to the first double-quote ( " ) in the string stops matching after it sees the next double-quote connected to any character matched with the first double-quote
+ * */
+
+const lazyRegex = /".+?"/g;
+const words = 'Harry Potter "and     " the goblet of "fire"';
+const match = words.match(lazyRegex);
+console.log(match);
+//resulting output with the global flag
+[ '"and     "', '"fire"' ]
+
+const lazyRegex = /".+?"/;
+const words = 'Harry Potter "and     " the goblet of "fire"';
+const match = words.match(lazyRegex);
+console.log(match);
+//resulting output without the global flag
+[
+  '"and     "',
+  index: 13,
+  input: 'Harry Potter "and     " the goblet of "fire"',
+  groups: undefined
+]
+```
+---
 ### Boundaries
 
 ### Back-references
