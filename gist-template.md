@@ -375,7 +375,45 @@ const backRefRegex = /(['"])(.*?)(['"])/g;
 ```
 ---
 ### Look-ahead and Look-behind
+Look-ahead and Look-behind can be used to match parts of a string only if the specified character's or expressions are contained in the look-ahead/behind capture group.
 
+Look-ahead - written in the format as  ```X(?=Y)``` where ```X``` can be an expression or set of characters and the ``` (?=Y) ``` means to only match ```X``` if it is preceded by ```Y``` which can be another set of characters or expression.
+
+Look-behind - written in the format as ```(?=Y)X``` which will match with ```X``` only if the ```Y``` expression is connected before ```X```.
+```js
+// here we are only looking ahead to match any digit in this string
+// if it is followed by the Ruble symbol ( ₽ ) but not the digit
+// at the beginning of the sentence since it is not followed by
+// the ruble symbol.
+const regex = /\d+(?=₽)/g;
+const words = "1 taxi costs 30₽";
+const match = words.match(regex);
+console.log(match);
+//outputs
+[ '30' ]
+
+//here we are looking behind to match the 30 in this string
+// only if it is preceded by the Ruble symbol ( ₽ )
+const regex = /(?<=₽)\d+/g;
+const words = "1 turkey costs ₽30";
+const match = words.match(regex);
+console.log(match);
+//outputs
+[ '30' ]
+```
+---
 ## Author
 
-A short section about the author with a link to the author's GitHub profile (replace with your information and a link to your profile)
+### About Me
+A little bit about me, my name is Anders and I love programming and the journey that goes along with it! My first love is music and will always be a part of my life in some way shape or form. I also do some sidework as an Audio Visual Technician and Stagehand for Corporate Events and Concerts. 
+
+### Live Streaming
+I occassionally live stream on my [twitch channel](https://twitch.tv/DJVikingsintheroad) doing live DJ sets and showcasing some visual art projects that I developed myself in JavaScript. My computer isn't quite as powerful yet to render such projects over a live OBS stream but one day soon this will be another source of fun for me!
+
+### GitHub
+If you want to check out my projects posted here on github you can find it all [here](https://github.com/Dj-Viking)
+
+### Thank you!
+Thanks for joining me on this quest for knowledge in the Regex world. If there are any corrections to be made on this that I didnt catch or if there are some better examples out there I would be more than happy to add them to this gist tutorial!
+
+Thanks again and happy coding!
